@@ -8,7 +8,7 @@ import face_recognition
 import os
 import training
 
-dataset_path = "/home/adlytic/Yasir Adlytic/Face Recognition/Driver_Faces_Updated/"
+dataset_path = "/home/adlytic/Yasir Adlytic/Adlytic_Internship/Face Recognition/Driver_Faces_Updated/"
 
 def recognize_face(frame_list, img_path, database_path="retinaface_driver_embeddings.pkl", threshold=0.45):
 
@@ -46,7 +46,7 @@ def recognize_face(frame_list, img_path, database_path="retinaface_driver_embedd
             name = names_db[best_idx]
             print("Saving frames...for known driver: ",name)
             drivers_facepics_count = len(os.listdir(os.path.join(dataset_path,name)))
-            if drivers_facepics_count < 20:
+            if drivers_facepics_count < 50:
                 for i, f in enumerate(frame_list):
                     filename = os.path.join(dataset_path,name, f"frame_{drivers_facepics_count+1}.jpg")
                     cv2.imwrite(filename, f)
@@ -145,11 +145,11 @@ def select_best_frame(video_path, every_n_frames=5, cnnflag=False):
 
     return frame_list
 
-file_names = os.listdir("/home/adlytic/Yasir Adlytic/Data/Evidence")
+file_names = os.listdir("../Data/Evidence")
 # print(file_names)
 
 for file_name in file_names:
     print("Processing File: ", file_name)
-    frame_list = select_best_frame(f"/home/adlytic/Yasir Adlytic/Data/Evidence/{file_name}")
+    frame_list = select_best_frame(f"../Data/Evidence/{file_name}")
     if frame_list:
         recognize_face(frame_list, "best_frame.jpg")
