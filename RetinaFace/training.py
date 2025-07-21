@@ -5,7 +5,7 @@ import pickle
 import numpy as np
 from insightface.app import FaceAnalysis
 
-def create_driver_embeddings(dataset_path="../Face Recognition/Driver_Faces", save_path="new_retinaface_driver_embeddings.pkl"):
+def create_driver_embeddings(dataset_path="/home/adlytic/Yasir Adlytic/Dataset/Driver_Faces", save_path="retinaface_driver_embeddings_21_July.pkl"):
     app = FaceAnalysis(name='buffalo_l')  # RetinaFace + ArcFace
     app.prepare(ctx_id=0)  # GPU: 0, CPU: -1
 
