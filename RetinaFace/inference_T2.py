@@ -9,16 +9,16 @@ import os
 import training
 from openpyxl import Workbook
 
-dataset_path = "/home/adlytic/Yasir Adlytic/Dataset/Driver_Faces_Updated_New/"
+dataset_path = "/home/adlytic/Yasir Adlytic/Dataset/Driver_Faces_22_July/"
 
 app = FaceAnalysis(name='buffalo_l', providers=['CUDAExecutionProvider'])
-app.prepare(ctx_id=0)  # GPU: 0, CPU: -1
+app.prepare(ctx_id=-1)  # GPU: 0, CPU: -1
 
 def variance_of_laplacian(image):
     # Measures image sharpness (higher is sharper)
     return cv2.Laplacian(image, cv2.CV_64F).var()
 
-def recognize_face(alert_folder, date, sheet, frame_list, img_path, database_path="new_retinaface_driver_embeddings.pkl", threshold=0.45):
+def recognize_face(alert_folder, date, sheet, frame_list, img_path, database_path="retinaface_driver_embeddings_22_July.pkl", threshold=0.45):
 
     drivers_count = len(os.listdir(dataset_path))
     with open(database_path, "rb") as f:
@@ -60,7 +60,7 @@ def recognize_face(alert_folder, date, sheet, frame_list, img_path, database_pat
                     print(f"Saved {filename}")
                     drivers_facepics_count+=1
                 
-                training.create_driver_embeddings(dataset_path="/home/adlytic/Yasir Adlytic/Dataset/Driver_Faces_Updated_New/")
+                training.create_driver_embeddings(dataset_path)
             else:
                 continue
         else:
@@ -74,7 +74,7 @@ def recognize_face(alert_folder, date, sheet, frame_list, img_path, database_pat
                 filename = os.path.join(dataset_path,f'd{drivers_count+1}', f"frame_{i}.jpg")
                 cv2.imwrite(filename, f)
                 print(f"Saved {filename}")
-            training.create_driver_embeddings(dataset_path="/home/adlytic/Yasir Adlytic/Dataset/Driver_Faces_Updated_New/")
+            training.create_driver_embeddings(dataset_path)
 
         # Draw result
         # box = face.bbox.astype(int)
