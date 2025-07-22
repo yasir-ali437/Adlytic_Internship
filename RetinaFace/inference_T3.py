@@ -6,11 +6,10 @@ from insightface.app import FaceAnalysis
 from sklearn.metrics.pairwise import cosine_similarity
 # import face_recognition
 import os
-import training
 from openpyxl import Workbook
 
-dataset_path = "/home/adlytic/Yasir Adlytic/Dataset/Driver_Face_21_July/"
-DATABASE_PATH = "retinaface_driver_embeddings_21_July.pkl"
+dataset_path = "/home/adlytic/Yasir Adlytic/Dataset/Driver_Face_21_T1_July/"
+DATABASE_PATH = "retinaface_driver_embeddings_21_T1_July.pkl"
 
 # Load existing data
 if os.path.exists(DATABASE_PATH):
