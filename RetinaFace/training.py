@@ -5,7 +5,7 @@ import pickle
 import numpy as np
 from insightface.app import FaceAnalysis
 
-def create_driver_embeddings(dataset_path="/home/adlytic/Yasir Adlytic/Dataset/Driver_Faces", save_path="retinaface_driver_embeddings_22_July.pkl"):
+def create_driver_embeddings(dataset_path="/home/adlytic/Yasir Adlytic/Dataset/Drivers_Dataset", save_path="retinaface_driver_embeddings_29_July.pkl"):
     app = FaceAnalysis(name='buffalo_l')  # RetinaFace + ArcFace
     app.prepare(ctx_id=0)  # GPU: 0, CPU: -1
 
@@ -25,9 +25,11 @@ def create_driver_embeddings(dataset_path="/home/adlytic/Yasir Adlytic/Dataset/D
             height, width, _ = img.shape
             mid = width // 2
 
-            # Crop left half
-            left_half = img[:, :mid]
-
+            if width > 1000 :
+                # Crop left half
+                left_half = img[:, :mid]
+            else:
+                left_half = img
             # Convert to RGB (face_recognition uses RGB)
             image_rgb = cv2.cvtColor(left_half, cv2.COLOR_BGR2RGB)
 

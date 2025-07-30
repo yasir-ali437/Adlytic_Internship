@@ -9,7 +9,7 @@ import os
 import training
 from openpyxl import Workbook
 
-dataset_path = "/home/adlytic/Yasir Adlytic/Dataset/Driver_Faces_22_July/"
+dataset_path = "/home/adlytic/Yasir Adlytic/Dataset/Driver_Faces_23_July"
 
 app = FaceAnalysis(name='buffalo_l', providers=['CUDAExecutionProvider'])
 app.prepare(ctx_id=-1)  # GPU: 0, CPU: -1
@@ -18,7 +18,7 @@ def variance_of_laplacian(image):
     # Measures image sharpness (higher is sharper)
     return cv2.Laplacian(image, cv2.CV_64F).var()
 
-def recognize_face(alert_folder, date, sheet, frame_list, img_path, database_path="retinaface_driver_embeddings_22_July.pkl", threshold=0.45):
+def recognize_face(alert_folder, date, sheet, frame_list, img_path, database_path="retinaface_driver_embeddings_23_July.pkl", threshold=0.45):
 
     drivers_count = len(os.listdir(dataset_path))
     with open(database_path, "rb") as f:
@@ -146,7 +146,7 @@ def select_best_frame(video_path, every_n_frames=5, cnnflag=False):
 #     if frame_list:
 #         recognize_face(frame_list, "best_frame.jpg")
 
-parentFolder = "/home/adlytic/Yasir Adlytic/Dataset/Alerts_OLD/"
+parentFolder = "/home/adlytic/Yasir Adlytic/Dataset/Alerts/"
 # Create a new Excel workbook
 wb = Workbook()
 sheet = wb.active
